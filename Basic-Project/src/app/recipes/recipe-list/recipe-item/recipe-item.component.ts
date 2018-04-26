@@ -13,10 +13,8 @@ export class RecipeItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('item');
   }
-  onSelected(recipe: Recipe ) {
+  onSelected(recipe: Recipe) {
     this.recipeSelected.emit(recipe);
- //   console.log(this.recipeSelected);
   }
 }
