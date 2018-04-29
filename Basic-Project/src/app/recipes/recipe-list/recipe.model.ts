@@ -2,6 +2,16 @@ import { Ingredient } from 'app/shared/ingredient.model';
 
 export class Recipe {
 
+
+  private _id: number;
+  public get id(): number {
+    return this._id;
+  }
+  public set id(v: number) {
+    this._id = v;
+  }
+
+
   private _name: string;
   public get name(): string {
     return this._name;
@@ -35,7 +45,8 @@ export class Recipe {
     this._ingredients = v;
   }
 
-  constructor(name: string, description: string, imagePath: string, ingredients: Ingredient[]) {
+  constructor(id: number, name: string, description: string, imagePath: string, ingredients: Ingredient[]) {
+    this.id = id;
     this.name = name;
     this.description = description;
     this.imagePath = imagePath;
