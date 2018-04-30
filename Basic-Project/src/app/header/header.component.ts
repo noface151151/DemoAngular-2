@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { DataStorageService } from './../shared/data-storage.service';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
@@ -9,7 +10,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   @Output() featureSelect = new EventEmitter<string>();
-  constructor(private storageService: DataStorageService) { }
+  constructor(private storageService: DataStorageService, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -25,5 +26,8 @@ export class HeaderComponent implements OnInit {
   }
   onFetchData() {
     this.storageService.getRecipes();
+  }
+  onLogout(){
+    this.authService.logOut();
   }
 }

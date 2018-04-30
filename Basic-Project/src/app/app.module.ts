@@ -19,6 +19,10 @@ import { ResipeEditComponent } from './recipes/resipe-edit/resipe-edit.component
 import { DataStorageService } from './shared/data-storage.service';
 import { HttpModule } from '@angular/http';
 import { KeysPipe } from './shared/keys.pipe';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { AuthService } from './auth/auth.service';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,9 @@ import { KeysPipe } from './shared/keys.pipe';
     DropdownDirective,
     RecipeStartComponent,
     ResipeEditComponent,
-    KeysPipe
+    KeysPipe,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,7 @@ import { KeysPipe } from './shared/keys.pipe';
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [RecipeService, ShoppingListService, DataStorageService],
+  providers: [RecipeService, ShoppingListService, DataStorageService, AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
