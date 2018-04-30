@@ -1,11 +1,13 @@
+import { Recipe } from './recipe-list/recipe.model';
 import { Injectable } from '@angular/core';
-import { Recipe } from 'app/recipes/recipe-list/recipe.model';
 import { Ingredient } from 'app/shared/ingredient.model';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class RecipeService {
+  recipeChange = new Subject<Recipe[]>();
   recipes: Recipe[] = [
-    new Recipe(1,
+    new Recipe(
       'Recipe 1',
       'Recipe 1 for test',
       'https://upload.wikimedia.org/wikipedia/commons/0/0a/Handi-chicken-Indian-dum-chicken-curry-recipe.jpg',
@@ -14,7 +16,7 @@ export class RecipeService {
         new Ingredient('Rice', 1),
       ]
     ),
-    new Recipe(2,
+    new Recipe(
       'Recipe 2',
       'Recipe 2 for test',
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLrIMNQbX8gJN-VTzocDTKOYdWoPKy2JX0xAj_C7yTP9sHCrek',
@@ -24,7 +26,7 @@ export class RecipeService {
       ]
     ),
 
-    new Recipe(3,
+    new Recipe(
       'Recipe 3',
       'Recipe 3 for test',
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR165nSfx1zJuZgmlexh9tvjfQsBzj_4wfRi3bwxrUDNVJBbq0q',
@@ -41,5 +43,23 @@ export class RecipeService {
   }
   getRecipeById(id: number) {
     return this.recipes[id];
+  }
+
+  addRecipe(newRecipe: Recipe) {
+    this.recipes.push(newRecipe);
+    this.recipeChange.next(this.recipes.slice());
+  }
+  updateRecipe(index: number, newRecipe: Recipe) {
+    this.recipes[index] = newRecipe;
+    this.recipeChange.next(this.recipes.slice());
+  }
+  deleteRecipe(index: number) {
+    this.recipes.splice(index, 1);
+    this.recipeChange.next(this.recipes.slice());
+  }
+  deleteIngredient(indexRecipe: number, indexIngredient: number) {
+    this.recipes[indexRecipe].ingredients.splice(indexIngredient, 1);
+    console.log(this.recipes);
+    this.recipeChange.next(this.recipes.slice());
   }
 }
