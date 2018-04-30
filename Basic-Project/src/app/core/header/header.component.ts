@@ -1,5 +1,5 @@
-import { AuthService } from './../auth/auth.service';
-import { DataStorageService } from './../shared/data-storage.service';
+import { AuthService } from '../../auth/auth.service';
+import { DataStorageService } from '../../shared/data-storage.service';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
   onFetchData() {
     this.storageService.getRecipes();
   }
-  onLogout(){
+  onLogout() {
     this.authService.logOut();
   }
 }
