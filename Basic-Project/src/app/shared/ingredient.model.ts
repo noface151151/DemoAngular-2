@@ -1,21 +1,7 @@
 export class Ingredient {
 
-    private _name: string;
-    public get name(): string {
-        return this._name;
-    }
-    public set name(v: string) {
-        this._name = v;
-    }
-
-    private _amount: number;
-    public get amount(): number {
-        return this._amount;
-    }
-    public set amount(v: number) {
-        this._amount = v;
-    }
-
+    public name: string;
+    public amount: number;
     constructor(name: string, amount: number) {
         this.name = name;
         this.amount = amount;

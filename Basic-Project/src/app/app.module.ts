@@ -16,6 +16,9 @@ import { RecipeService } from 'app/recipes/recipe.service';
 import { ShoppingListService } from 'app/shopping-list/shopping-list.service';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { ResipeEditComponent } from './recipes/resipe-edit/resipe-edit.component';
+import { DataStorageService } from './shared/data-storage.service';
+import { HttpModule } from '@angular/http';
+import { KeysPipe } from './shared/keys.pipe';
 
 @NgModule({
   declarations: [
@@ -29,15 +32,17 @@ import { ResipeEditComponent } from './recipes/resipe-edit/resipe-edit.component
     ShoppingEditComponent,
     DropdownDirective,
     RecipeStartComponent,
-    ResipeEditComponent
+    ResipeEditComponent,
+    KeysPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
-  providers: [RecipeService, ShoppingListService],
+  providers: [RecipeService, ShoppingListService, DataStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
