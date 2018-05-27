@@ -5,10 +5,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { HttpModule } from '@angular/http';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SharedModule } from './shared/shared.module';
+import { HttpClientModule } from '@angular/common/http'
+import { StoreModule } from '@ngrx/store';
+import { shoppingListReducer } from './shopping-list/store/shopping-list.reducers';
 
 @NgModule({
   declarations: [
@@ -19,10 +21,12 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpModule,
+    //  HttpModule,
+    HttpClientModule,
     ShoppingListModule,
     SharedModule,
-    CoreModule
+    CoreModule,
+    StoreModule.forRoot({ shoppingList: shoppingListReducer })
   ],
   bootstrap: [AppComponent]
 })
