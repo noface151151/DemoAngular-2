@@ -13,31 +13,38 @@ export class AuthService {
   signup(email: string, password: string) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(
-      user => {
-        this.store.dispatch(new AuthActions.SignUp());
-      }
+        user => {
+          this.store.dispatch(new AuthActions.SignUp());
+          firebase.auth().currentUser.getToken()
+            .then(
+              (token: string) => {
+                this.token = token;
+                this.store.dispatch(new AuthActions.SetToken(token));
+              }
+            )
+        }
       )
       .catch(
-      error => console.log(error)
+        error => console.log(error)
       );
   }
   signin(email: string, password: string) {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
-      response => {
-        this.store.dispatch(new AuthActions.SignIn());
-        this.router.navigate(['/'])
-        firebase.auth().currentUser.getToken()
-          .then(
-          (token: string) => {
-            this.token = token;
-            this.store.dispatch(new AuthActions.SetToken(token));
-          }
-          )
-      }
+        response => {
+          this.store.dispatch(new AuthActions.SignIn());
+          this.router.navigate(['/'])
+          firebase.auth().currentUser.getToken()
+            .then(
+              (token: string) => {
+                this.token = token;
+                this.store.dispatch(new AuthActions.SetToken(token));
+              }
+            )
+        }
       )
       .catch(
-      error => console.log(error)
+        error => console.log(error)
       );
   }
   logOut() {
